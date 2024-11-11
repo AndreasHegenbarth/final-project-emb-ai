@@ -1,36 +1,32 @@
-# Import the Flask class from the flask module
-from flask import Flask
-
-# Create an instance of the Flask class, passing in the name of the current module
-app = Flask(__name__)
-
-# Define a route for the root URL ("/")
-@app.route("/")
-def hello_world():
-    # Function that handles requests to the root URL
-    return "Hello, World!"
-
-    ''' Executing this function initiates the application of sentiment
-    analysis to be executed over the Flask channel and deployed on
-    localhost:5000.
+from flask import Flask, render_template, request
+from EmotionDetection.emotion_detection import emotion_detector
 
 
-@app.route("/sentimentAnalyzer")
-def sent_analyzer():
-    ''' This code receives the text from the HTML interface and 
-        runs sentiment analysis over it using sentiment_analysis()
-        function. The output returned shows the label and its confidence 
-        score for the provided text.
-    '''
-    # TODO
+app = Flask("Emotion Detection")
 
 @app.route("/")
 def render_index_page():
-    ''' This function initiates the rendering of the main application
-        page over the Flask channel
-    '''
-    #TODO
+    return render_template('index.html')
+
+@app.route("/emotionDetector")
+def sent_emotion_detector():
+    print('emotion_detector')
+    text_to_analyze = request.args.get('textToAnalyze')
+    print(text_to_analyze)
+
+    response = emotion_detector(text_to_analyze)
+
+    print(response)
+    anger = response['anger']
+    disgust = response['disgust']
+    fear = response['fear']
+    joy = response['joy']
+    sadness = response['sadness']
+    dominant_emotion = response['dominant_emotion']
+
+    # Return a formatted string with the sentiment label and score
+    return "I love my life: ".format(anger, disgust, fear, joy, sadness, dominant_emotion)
+
 
 if __name__ == "__main__":
-    ''' This functions executes the flask app and deploys it on localhost:5000
-    '''#TODO
+    app.run(host="0.0.0.0", port=5005)
