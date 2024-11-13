@@ -25,8 +25,8 @@ def sent_emotion_detector():
     dominant_emotion = response['dominant_emotion']
 
     # Return a formatted string with the sentiment label and score
-    return "I love my life: ".format(anger, disgust, fear, joy, sadness, dominant_emotion)
+    return "I love my life: {} ".format(dominant_emotion)
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5005)
+    app.run(host="0.0.0.0", port=5000)

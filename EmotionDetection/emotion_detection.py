@@ -15,6 +15,7 @@ def emotion_detector(text_to_analyse):
     anger = emotion['anger']
     disgust = emotion['disgust']
     joy = emotion['joy']
+    fear = emotion['fear']
     sadness = emotion['sadness']
     Keymax = max(zip(emotion.values(), emotion.keys()))[1]
  
@@ -22,6 +23,7 @@ def emotion_detector(text_to_analyse):
         'anger': anger, 
         'disgust': disgust,
         'joy': joy,
+        'fear': fear,
         'sadness': sadness,
         'dominant_emotion': Keymax
         }
