@@ -23,9 +23,12 @@ def sent_emotion_detector():
     joy = response['joy']
     sadness = response['sadness']
     dominant_emotion = response['dominant_emotion']
-
-    # Return a formatted string with the sentiment label and score
-    return "I love my life: {} ".format(dominant_emotion)
+    
+    if dominant_emotion is '':
+        return "Invalid input! Try again."
+    else:
+        # Return a formatted string with the sentiment label and score
+        return "For the given statement, the system response is 'anger': {}, 'disgust': {}, 'fear': {}, 'joy': {} and 'sadness':{}.<br /><br /> The dominant emotion is <b>{}</b> ".format(anger, disgust, fear, joy, sadness, dominant_emotion)
 
 
 if __name__ == "__main__":
